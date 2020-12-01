@@ -10,7 +10,7 @@ namespace aoc2020
                                          std::vector<int>::const_iterator e,
                                          int magic_value)
     {
-        assert(std::distance(b, e) > 2);
+        assert(std::distance(b, e) > 1);
 
         auto const first_end = e - 1;
         while(b != first_end)

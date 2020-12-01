@@ -61,7 +61,7 @@ create_library(accounting
     accounting.cpp
 )
 
-#add_subdirectory(test)
+add_subdirectory(test)
 
 create_puzzle(1a
     LIBRARIES
