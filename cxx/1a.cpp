@@ -5,8 +5,12 @@
 #include <stdexcept>
 #include <vector>
 
+#include <aoc/accounting.hpp>
+
 namespace
 {
+    constexpr auto magic_number = 2020;
+
     int do_work(std::istream & input)
     {
         std::vector<int> expenses;
@@ -17,20 +21,14 @@ namespace
         }
         assert(expenses.size() > 1);
         std::sort(std::begin(expenses), std::end(expenses));
-        auto b = std::begin(expenses);
-        auto e = std::end(expenses) - 1;
-        while(b != e)
+
+        auto result = aoc2020::calculate_product(
+            std::begin(expenses), std::end(expenses), magic_number);
+        if(result)
         {
-            auto const magic_number = 2020;
-            auto const expected = magic_number - (*b);
-            auto it = std::lower_bound(b, e, expected);
-            if((it != e) && (*it == expected))
-            {
-                return (*b) * (*it);
-            }
-            e = it;
-            ++b;
+            return *result;
         }
+
         throw std::runtime_error{"Match not found"};
     }
 } // namespace

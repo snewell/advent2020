@@ -5,8 +5,12 @@
 #include <stdexcept>
 #include <vector>
 
+#include <aoc/accounting.hpp>
+
 namespace
 {
+    constexpr auto magic_number = 2020;
+
     int do_work(std::istream & input)
     {
         std::vector<int> expenses;
@@ -15,27 +19,19 @@ namespace
         {
             expenses.push_back(value);
         }
-        std::sort(std::begin(expenses), std::end(expenses));
         assert(expenses.size() > 2);
+        std::sort(std::begin(expenses), std::end(expenses));
+
         auto first = std::begin(expenses);
-        auto second_end = std::end(expenses) - 1;
-        auto first_end = second_end - 1;
+        auto first_end = std::end(expenses) - 2;
         while(first != first_end)
         {
-            auto const magic_number = 2020;
             auto const remaining = magic_number - (*first);
-
-            auto second = std::next(first);
-            while(second != second_end)
+            auto const result = aoc2020::calculate_product(
+                std::next(first), std::end(expenses), remaining);
+            if(result)
             {
-                auto const expected = remaining - (*second);
-                auto it = std::lower_bound(second, second_end, expected);
-                if((it != second_end) && (*it == expected))
-                {
-                    return (*first) * (*second) * (*it);
-                }
-                second_end = it;
-                ++second;
+                return (*first) * (*result);
             }
             ++first;
         }

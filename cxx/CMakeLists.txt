@@ -57,12 +57,20 @@ function(create_library name)
     )
 endfunction()
 
+create_library(accounting
+    accounting.cpp
+)
+
 #add_subdirectory(test)
 
 create_puzzle(1a
+    LIBRARIES
+        accounting
     VALIDATE 1005459
 )
 create_puzzle(1b
+    LIBRARIES
+        accounting
     VALIDATE 92643264
 )
 
