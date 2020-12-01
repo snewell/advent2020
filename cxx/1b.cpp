@@ -18,8 +18,8 @@ namespace
         std::sort(std::begin(expenses), std::end(expenses));
         assert(expenses.size() > 2);
         auto first = std::begin(expenses);
-        auto const second_end = std::end(expenses) - 1;
-        auto const first_end = second_end - 1;
+        auto second_end = std::end(expenses) - 1;
+        auto first_end = second_end - 1;
         while(first != first_end)
         {
             auto const magic_number = 2020;
@@ -34,6 +34,7 @@ namespace
                 {
                     return (*first) * (*second) * (*it);
                 }
+                second_end = it;
                 ++second;
             }
             ++first;

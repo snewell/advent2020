@@ -18,7 +18,7 @@ namespace
         assert(expenses.size() > 1);
         std::sort(std::begin(expenses), std::end(expenses));
         auto b = std::begin(expenses);
-        auto const e = std::end(expenses) - 1;
+        auto e = std::end(expenses) - 1;
         while(b != e)
         {
             auto const magic_number = 2020;
@@ -28,6 +28,7 @@ namespace
             {
                 return (*b) * (*it);
             }
+            e = it;
             ++b;
         }
         throw std::runtime_error{"Match not found"};
