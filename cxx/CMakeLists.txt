@@ -73,4 +73,6 @@ create_puzzle(1b
         accounting
     VALIDATE 92643264
 )
-
+create_puzzle(2a
+    VALIDATE 283
+)
