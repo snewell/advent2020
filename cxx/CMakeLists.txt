@@ -74,5 +74,8 @@ create_puzzle(1b
     VALIDATE 92643264
 )
 create_puzzle(2a
-    VALIDATE 283
+    VALIDATE 483
+)
+create_puzzle(2b
+    VALIDATE 482
 )
