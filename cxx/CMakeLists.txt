@@ -79,3 +79,9 @@ create_puzzle(2a
 create_puzzle(2b
     VALIDATE 482
 )
+create_puzzle(3a
+    VALIDATE 171
+)
+create_puzzle(3b
+    VALIDATE 1206576000
+)
