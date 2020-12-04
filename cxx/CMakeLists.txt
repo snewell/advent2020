@@ -88,3 +88,6 @@ create_puzzle(3b
 create_puzzle(4a
     VALIDATE 228
 )
+create_puzzle(4b
+    VALIDATE 175
+)
