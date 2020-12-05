@@ -99,3 +99,8 @@ create_puzzle(5a
         pass
     VALIDATE 885
 )
+create_puzzle(5b
+    LIBRARIES
+        pass
+    VALIDATE 623
+)
