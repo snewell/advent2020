@@ -23,3 +23,10 @@ create_test(accounting_test
     LIBRARIES
         accounting
 )
+
+create_test(pass_test
+    SOURCES
+        pass_test.cpp
+    LIBRARIES
+        pass
+)

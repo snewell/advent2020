@@ -60,6 +60,9 @@ endfunction()
 create_library(accounting
     accounting.cpp
 )
+create_library(pass
+    pass.cpp
+)
 
 add_subdirectory(test)
 
@@ -90,4 +93,9 @@ create_puzzle(4a
 )
 create_puzzle(4b
     VALIDATE 175
+)
+create_puzzle(5a
+    LIBRARIES
+        pass
+    VALIDATE 885
 )
