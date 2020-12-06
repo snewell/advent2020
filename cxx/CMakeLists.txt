@@ -104,3 +104,9 @@ create_puzzle(5b
         pass
     VALIDATE 623
 )
+create_puzzle(6a
+    VALIDATE 6775
+)
+create_puzzle(6b
+    VALIDATE 3356
+)
