@@ -23,7 +23,12 @@ create_test(accounting_test
     LIBRARIES
         accounting
 )
-
+create_test(baggage_test
+    SOURCES
+        baggage_test.cpp
+    LIBRARIES
+        baggage
+)
 create_test(pass_test
     SOURCES
         pass_test.cpp

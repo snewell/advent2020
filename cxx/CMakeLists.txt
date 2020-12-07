@@ -60,6 +60,9 @@ endfunction()
 create_library(accounting
     accounting.cpp
 )
+create_library(baggage
+    baggage.cpp
+)
 create_library(pass
     pass.cpp
 )
@@ -109,4 +112,9 @@ create_puzzle(6a
 )
 create_puzzle(6b
     VALIDATE 3356
+)
+create_puzzle(7a
+    LIBRARIES
+        baggage
+    VALIDATE 252
 )
