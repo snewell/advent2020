@@ -118,3 +118,8 @@ create_puzzle(7a
         baggage
     VALIDATE 252
 )
+create_puzzle(7b
+    LIBRARIES
+        baggage
+    VALIDATE 35487
+)
