@@ -63,6 +63,9 @@ create_library(accounting
 create_library(baggage
     baggage.cpp
 )
+create_library(computer
+    computer.cpp
+)
 create_library(pass
     pass.cpp
 )
@@ -122,4 +125,14 @@ create_puzzle(7b
     LIBRARIES
         baggage
     VALIDATE 35487
+)
+create_puzzle(8a
+    LIBRARIES
+        computer
+    VALIDATE 1487
+)
+create_puzzle(8b
+    LIBRARIES
+        computer
+    VALIDATE 1607
 )
