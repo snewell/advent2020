@@ -9,9 +9,15 @@ namespace aoc2020
 {
     struct Instruction
     {
-        Instruction(std::string command, int argument);
+        enum class Command
+        {
+            jump,
+            accumulate,
+            nop
+        };
+        Instruction(Command command, int argument);
 
-        std::string command;
+        Command command;
         int argument;
     };
 

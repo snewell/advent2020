@@ -6,21 +6,28 @@
 
 namespace aoc2020
 {
-    Instruction::Instruction(std::string command, int argument)
-      : command{std::move(command)}
+    Instruction::Instruction(Command command, int argument)
+      : command{command}
       , argument{argument}
     {
     }
 
     Instructions parse_instructions(std::istream & input)
     {
+        static std::unordered_map<std::string, Instruction::Command> const
+            command_map = {
+                std::make_pair("nop", Instruction::Command::nop),
+                std::make_pair("jmp", Instruction::Command::jump),
+                std::make_pair("acc", Instruction::Command::accumulate)};
         Instructions ret;
 
         std::string command;
         int argument;
         while(input >> command >> argument)
         {
-            ret.emplace_back(command, argument);
+            auto it = command_map.find(command);
+            assert(it != command_map.end());
+            ret.emplace_back(it->second, argument);
         }
         return ret;
     }
@@ -54,9 +61,11 @@ namespace
         return 1;
     }
 
-    std::map<std::string, int (*)(int, int &)> const instructions = {
-        std::make_pair("acc", accumulate), std::make_pair("jmp", jump),
-        std::make_pair("nop", nop)};
+    std::map<aoc2020::Instruction::Command,
+             int (*)(int, int &)> const instructions = {
+        std::make_pair(aoc2020::Instruction::Command::accumulate, accumulate),
+        std::make_pair(aoc2020::Instruction::Command::jump, jump),
+        std::make_pair(aoc2020::Instruction::Command::nop, nop)};
 } // namespace
 
 namespace aoc2020

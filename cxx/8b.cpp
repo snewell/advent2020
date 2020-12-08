@@ -15,14 +15,15 @@ namespace
         auto ret = original_instructions;
         auto position = std::distance(std::begin(original_instructions),
                                       candidate_to_change);
-        if(ret[position].command == "nop")
+        if(ret[position].command == aoc2020::Instruction::Command::nop)
         {
-            ret[position].command = "jmp";
+            ret[position].command = aoc2020::Instruction::Command::jump;
         }
         else
         {
-            assert(ret[position].command == "jmp");
-            ret[position].command = "nop";
+            assert(ret[position].command ==
+                   aoc2020::Instruction::Command::jump);
+            ret[position].command = aoc2020::Instruction::Command::nop;
         }
         return ret;
     }
@@ -31,11 +32,14 @@ namespace
     {
         auto const original_instructions = aoc2020::parse_instructions(input);
         auto find_possible_change = [&original_instructions](auto start_point) {
-            return std::find_if(start_point, std::end(original_instructions),
-                                [](auto const & instruction) {
-                                    return (instruction.command == "jmp") ||
-                                           (instruction.command == "nop");
-                                });
+            return std::find_if(
+                start_point, std::end(original_instructions),
+                [](auto const & instruction) {
+                    return (instruction.command ==
+                            aoc2020::Instruction::Command::jump) ||
+                           (instruction.command ==
+                            aoc2020::Instruction::Command::nop);
+                });
         };
 
         std::vector<int> instruction_visits(original_instructions.size(), 0);
@@ -48,8 +52,8 @@ namespace
                 make_instructions(original_instructions, next_change)};
 
             auto next_instruction = computer.execute_one();
-            while((instruction_visits[next_instruction] == 0) &&
-                  (next_instruction != original_instructions.size()))
+            while((next_instruction != original_instructions.size()) &&
+                  (instruction_visits[next_instruction] == 0))
             {
                 ++instruction_visits[next_instruction];
                 next_instruction = computer.execute_one();
