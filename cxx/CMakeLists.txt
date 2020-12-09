@@ -136,3 +136,6 @@ create_puzzle(8b
         computer
     VALIDATE 1607
 )
+create_puzzle(9a
+    VALIDATE 14144619
+)
