@@ -139,3 +139,6 @@ create_puzzle(8b
 create_puzzle(9a
     VALIDATE 14144619
 )
+create_puzzle(9b
+    VALIDATE 1766397
+)
