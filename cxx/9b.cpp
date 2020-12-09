@@ -13,16 +13,17 @@ namespace
         auto b = std::begin(sorted_considerations);
         auto e = std::end(sorted_considerations);
 
-        while(b < e)
+        while(b != e)
         {
             auto const required = value - (*b);
-            auto it = std::lower_bound(b, e, required);
+            auto const next_b = std::next(b);
+            auto it = std::lower_bound(next_b, e, required);
             if((it != e) && ((*it) == required))
             {
                 return true;
             }
             e = it;
-            std::advance(b, 1);
+            b = next_b;
         }
         return false;
     }
