@@ -17,7 +17,7 @@ namespace
         }
         std::sort(std::begin(adapters), std::end(adapters));
 
-        std::array<int, 3> differences;
+        std::array<int, 3> differences = {0, 0, 0};
         ++differences[2]; // laptop is always 3 more
         std::adjacent_find(std::begin(adapters), std::end(adapters),
                            [&differences](auto first, auto second) {
