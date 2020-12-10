@@ -146,3 +146,6 @@ create_puzzle(9b
 create_puzzle(10a
     VALIDATE 2346
 )
+create_puzzle(10b
+    VALIDATE 6044831973376
+)
