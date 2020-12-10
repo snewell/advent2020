@@ -20,13 +20,18 @@ namespace
         std::vector<long long> end_count(adapters.size(), 0);
         end_count.back() = 1; // we have to use the last adapter
         auto current_index = end_count.size();
-        while(current_index > 0) {
+        while(current_index > 0)
+        {
             --current_index;
             auto const last_index = (current_index > 3) ? current_index - 3 : 0;
 
-            for(auto consider = last_index; consider < current_index; ++consider) {
-                auto const difference = adapters[current_index] - adapters[consider];
-                if(difference <= 3) {
+            for(auto consider = last_index; consider < current_index;
+                ++consider)
+            {
+                auto const difference =
+                    adapters[current_index] - adapters[consider];
+                if(difference <= 3)
+                {
                     end_count[consider] += end_count[current_index];
                 }
             }
