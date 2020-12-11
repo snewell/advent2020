@@ -17,6 +17,9 @@ namespace aoc2020
         SeatNeighbors get_neighbor_info(std::size_t row, std::size_t col) const
             noexcept;
 
+        SeatNeighbors get_angle_info(std::size_t row, std::size_t col) const
+            noexcept;
+
         friend bool operator==(SeatMap const & lhs,
                                SeatMap const & rhs) noexcept;
 
@@ -30,7 +33,10 @@ namespace aoc2020
 
     SeatMap read_seat_map(std::istream & input);
 
-    SeatMap run_cycle(SeatMap const & previous);
+    SeatMap run_cycle(SeatMap const & previous,
+                      SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
+                                                          std::size_t) const,
+                      std::size_t tolerance);
 } // namespace aoc2020
 
 #endif

@@ -1,6 +1,7 @@
 #include <aoc/seatmap.hpp>
 
 #include <cassert>
+#include <functional>
 
 namespace aoc2020
 {
@@ -86,7 +87,10 @@ namespace aoc2020
         return ret;
     }
 
-    SeatMap run_cycle(SeatMap const & previous)
+    SeatMap run_cycle(SeatMap const & previous,
+                      SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
+                                                          std::size_t) const,
+                      std::size_t tolerance)
     {
         auto ret = previous;
         for(decltype(ret.row_count) row = 0; row < ret.row_count; ++row)
@@ -96,7 +100,8 @@ namespace aoc2020
                 auto & seat = ret.seats[(row * ret.row_length) + col];
                 if(seat != '.')
                 {
-                    auto const neighbors = previous.get_neighbor_info(row, col);
+                    auto const neighbors =
+                        std::invoke(lookup_fn, previous, row, col);
                     if(seat == 'L')
                     {
                         if(neighbors.occupied == 0)
@@ -107,7 +112,7 @@ namespace aoc2020
                     else
                     {
                         assert(seat == '#');
-                        if(neighbors.occupied >= 4)
+                        if(neighbors.occupied >= tolerance)
                         {
                             seat = 'L';
                         }
