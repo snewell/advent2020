@@ -25,19 +25,15 @@ namespace aoc2020
         return ret;
     }
 
-    SeatNeighbors SeatMap::get_neighbor_info(std::size_t row,
-                                             std::size_t col) const noexcept
+    std::size_t SeatMap::get_occupied_neighbors(std::size_t row,
+                                                std::size_t col) const noexcept
     {
-        SeatNeighbors ret{0, 0};
+        std::size_t occupied_neighbors = 0;
 
-        auto adjust_correct = [&ret](auto seat) {
+        auto adjust_correct = [&occupied_neighbors](auto seat) {
             if(seat == '#')
             {
-                ++ret.occupied;
-            }
-            else
-            {
-                ++ret.available;
+                ++occupied_neighbors;
             }
         };
 
@@ -85,22 +81,18 @@ namespace aoc2020
                 adjust_correct(get_seat(row + 1, col + 1));
             }
         }
-        return ret;
+        return occupied_neighbors;
     }
 
-    SeatNeighbors SeatMap::get_angle_info(std::size_t row,
-                                          std::size_t col) const noexcept
+    std::size_t SeatMap::get_occupied_angles(std::size_t row,
+                                             std::size_t col) const noexcept
     {
-        SeatNeighbors ret{0, 0};
+        std::size_t occupied_neighbors = 0;
 
-        auto adjust_correct = [&ret](auto seat) {
+        auto adjust_correct = [&occupied_neighbors](auto seat) {
             if(seat.value_or('L') == '#')
             {
-                ++ret.occupied;
-            }
-            else
-            {
-                ++ret.available;
+                ++occupied_neighbors;
             }
         };
 
@@ -173,11 +165,11 @@ namespace aoc2020
         adjust_correct(search_angle(1, -1));  // lower left
         adjust_correct(search_angle(1, 1));   // lower right
 
-        return ret;
+        return occupied_neighbors;
     }
 
     void run_cycle(SeatMap const & previous, SeatMap & output,
-                   SeatNeighbors (SeatMap::*lookup_fn)(std::size_t, std::size_t)
+                   std::size_t (SeatMap::*lookup_fn)(std::size_t, std::size_t)
                        const,
                    std::size_t tolerance)
     {
@@ -190,11 +182,11 @@ namespace aoc2020
                 auto & seat = output.seats[(row * output.row_length) + col];
                 if(seat != '.')
                 {
-                    auto const neighbors =
+                    auto const occupied_neighbors =
                         std::invoke(lookup_fn, previous, row, col);
                     if(seat == 'L')
                     {
-                        if(neighbors.occupied == 0)
+                        if(occupied_neighbors == 0)
                         {
                             seat = '#';
                         }
@@ -202,7 +194,7 @@ namespace aoc2020
                     else
                     {
                         assert(seat == '#');
-                        if(neighbors.occupied >= tolerance)
+                        if(occupied_neighbors >= tolerance)
                         {
                             seat = 'L';
                         }
@@ -213,8 +205,8 @@ namespace aoc2020
     }
 
     SeatMap run_cycle(SeatMap const & previous,
-                      SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
-                                                          std::size_t) const,
+                      std::size_t (SeatMap::*lookup_fn)(std::size_t,
+                                                        std::size_t) const,
                       std::size_t tolerance)
     {
         auto ret = previous;

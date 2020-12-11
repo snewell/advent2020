@@ -19,7 +19,7 @@ namespace
     {
         auto current_map = aoc2020::read_seat_map(input);
         auto next_map = aoc2020::run_cycle(
-            current_map, &aoc2020::SeatMap::get_neighbor_info, 4);
+            current_map, &aoc2020::SeatMap::get_occupied_neighbors, 4);
         while(current_map != next_map)
         {
 #if 0
@@ -29,7 +29,7 @@ namespace
             std::cout << "\n\n";
 #endif
             aoc2020::run_cycle(next_map, current_map,
-                               &aoc2020::SeatMap::get_neighbor_info, 4);
+                               &aoc2020::SeatMap::get_occupied_neighbors, 4);
             std::swap(next_map, current_map);
         }
         return std::count_if(std::begin(current_map.seats),
