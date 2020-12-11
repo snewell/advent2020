@@ -176,17 +176,18 @@ namespace aoc2020
         return ret;
     }
 
-    SeatMap run_cycle(SeatMap const & previous,
-                      SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
-                                                          std::size_t) const,
-                      std::size_t tolerance)
+    void run_cycle(SeatMap const & previous, SeatMap & output,
+                   SeatNeighbors (SeatMap::*lookup_fn)(std::size_t, std::size_t)
+                       const,
+                   std::size_t tolerance)
     {
-        auto ret = previous;
-        for(decltype(ret.row_count) row = 0; row < ret.row_count; ++row)
+        output.seats = previous.seats;
+        for(decltype(output.row_count) row = 0; row < output.row_count; ++row)
         {
-            for(decltype(ret.row_length) col = 0; col < ret.row_length; ++col)
+            for(decltype(output.row_length) col = 0; col < output.row_length;
+                ++col)
             {
-                auto & seat = ret.seats[(row * ret.row_length) + col];
+                auto & seat = output.seats[(row * output.row_length) + col];
                 if(seat != '.')
                 {
                     auto const neighbors =
@@ -209,6 +210,15 @@ namespace aoc2020
                 }
             }
         }
+    }
+
+    SeatMap run_cycle(SeatMap const & previous,
+                      SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
+                                                          std::size_t) const,
+                      std::size_t tolerance)
+    {
+        auto ret = previous;
+        run_cycle(previous, ret, lookup_fn, tolerance);
         return ret;
     }
 

@@ -37,6 +37,11 @@ namespace aoc2020
                       SeatNeighbors (SeatMap::*lookup_fn)(std::size_t,
                                                           std::size_t) const,
                       std::size_t tolerance);
+
+    void run_cycle(SeatMap const & previous, SeatMap & output,
+                   SeatNeighbors (SeatMap::*lookup_fn)(std::size_t, std::size_t)
+                       const,
+                   std::size_t tolerance);
 } // namespace aoc2020
 
 #endif
