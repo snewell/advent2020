@@ -69,6 +69,9 @@ create_library(computer
 create_library(pass
     pass.cpp
 )
+create_library(seatmap
+    seatmap.cpp
+)
 
 add_subdirectory(test)
 
@@ -148,4 +151,9 @@ create_puzzle(10a
 )
 create_puzzle(10b
     VALIDATE 6044831973376
+)
+create_puzzle(11a
+    LIBRARIES
+        seatmap
+    VALIDATE 2247
 )
