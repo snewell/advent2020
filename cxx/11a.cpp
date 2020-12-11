@@ -7,14 +7,6 @@
 
 namespace
 {
-#if 0
-    void write(aoc2020::SeatMap const &seat_map) {
-        for(std::size_t i = 0; i < seat_map.row_count; ++i) {
-            std::cout.write(seat_map.seats.data() + (seat_map.row_length * i), seat_map.row_length);
-            std::cout << '\n';
-        }
-    }
-#endif
     int do_work(std::istream & input)
     {
         auto current_map = aoc2020::read_seat_map(input);
@@ -22,12 +14,6 @@ namespace
             current_map, &aoc2020::SeatMap::get_occupied_neighbors, 4);
         while(current_map != next_map)
         {
-#if 0
-            std::cout << "     CURRENT\n";
-            std::cout << "-----------------\n";
-            write(current_map);
-            std::cout << "\n\n";
-#endif
             aoc2020::run_cycle(next_map, current_map,
                                &aoc2020::SeatMap::get_occupied_neighbors, 4);
             std::swap(next_map, current_map);
@@ -35,7 +21,6 @@ namespace
         return std::count_if(std::begin(current_map.seats),
                              std::end(current_map.seats),
                              [](auto seat) { return seat == '#'; });
-        return 0;
     }
 } // namespace
 
