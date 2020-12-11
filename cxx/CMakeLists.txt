@@ -157,3 +157,8 @@ create_puzzle(11a
         seatmap
     VALIDATE 2247
 )
+create_puzzle(11b
+    LIBRARIES
+        seatmap
+    VALIDATE 2011
+)

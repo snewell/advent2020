@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <functional>
+#include <optional>
 
 namespace aoc2020
 {
@@ -84,6 +85,94 @@ namespace aoc2020
                 adjust_correct(get_seat(row + 1, col + 1));
             }
         }
+        return ret;
+    }
+
+    SeatNeighbors SeatMap::get_angle_info(std::size_t row,
+                                          std::size_t col) const noexcept
+    {
+        SeatNeighbors ret{0, 0};
+
+        auto adjust_correct = [&ret](auto seat) {
+            if(seat.value_or('L') == '#')
+            {
+                ++ret.occupied;
+            }
+            else
+            {
+                ++ret.available;
+            }
+        };
+
+        auto get_seat = [this](auto row, auto col) {
+            return seats[(row * row_length) + col];
+        };
+
+        auto search_column =
+            [this, row, col, get_seat](auto adjustment) -> std::optional<char> {
+            auto const boundary = (adjustment < 0) ? 0 : (row_length - 1);
+
+            auto local = col;
+            while(local != boundary)
+            {
+                local += adjustment;
+                auto const seat = get_seat(row, local);
+                if(seat != '.')
+                {
+                    return seat;
+                }
+            }
+            return std::nullopt;
+        };
+
+        auto search_row = [this, row, col,
+                           get_seat](auto adjustment) -> std::optional<char> {
+            auto const boundary = (adjustment < 0) ? 0 : (row_count - 1);
+
+            auto local = row;
+            while(local != boundary)
+            {
+                local += adjustment;
+                auto const seat = get_seat(local, col);
+                if(seat != '.')
+                {
+                    return seat;
+                }
+            }
+            return std::nullopt;
+        };
+
+        auto search_angle = [this, row, col,
+                             get_seat](auto row_adjust,
+                                       auto col_adjust) -> std::optional<char> {
+            auto const row_boundary = (row_adjust < 0) ? 0 : (row_count - 1);
+            auto const col_boundary = (col_adjust < 0) ? 0 : (row_length - 1);
+
+            auto local_row = row;
+            auto local_col = col;
+            while((local_row != row_boundary) && (local_col != col_boundary))
+            {
+                local_row += row_adjust;
+                local_col += col_adjust;
+                auto const seat = get_seat(local_row, local_col);
+                if(seat != '.')
+                {
+                    return seat;
+                }
+            }
+            return std::nullopt;
+        };
+
+        adjust_correct(search_column(-1)); // up
+        adjust_correct(search_column(1));  // down
+        adjust_correct(search_row(-1));    // left
+        adjust_correct(search_row(1));     // right
+
+        adjust_correct(search_angle(-1, -1)); // upper left
+        adjust_correct(search_angle(-1, 1));  // upper right
+        adjust_correct(search_angle(1, -1));  // lower left
+        adjust_correct(search_angle(1, 1));   // lower right
+
         return ret;
     }
 
