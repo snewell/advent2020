@@ -36,11 +36,12 @@ namespace
 
                 };
 
-            auto const direction_it = std::lower_bound(
-                std::begin(adjustments), std::end(adjustments), command,
-                [](auto lhs, auto const & rhs) { return lhs.first < rhs; });
-            if((direction_it != std::end(adjustments)) &&
-               (direction_it->first == command))
+            auto const direction_it =
+                std::find_if(std::begin(adjustments), std::end(adjustments),
+                             [command](auto const & adjustment) {
+                                 return command == adjustment.first;
+                             });
+            if(direction_it != std::end(adjustments))
             {
                 adjust_position(direction_it->second, amount);
             }

@@ -4,8 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-// 2,901,572
-
 namespace
 {
     int do_work(std::istream & input)
@@ -30,11 +28,12 @@ namespace
 
                 };
 
-            auto const direction_it = std::lower_bound(
-                std::begin(adjustments), std::end(adjustments), command,
-                [](auto lhs, auto const & rhs) { return lhs.first < rhs; });
-            if((direction_it != std::end(adjustments)) &&
-               (direction_it->first == command))
+            auto const direction_it =
+                std::find_if(std::begin(adjustments), std::end(adjustments),
+                             [command](auto const & adjustment) {
+                                 return command == adjustment.first;
+                             });
+            if(direction_it != std::end(adjustments))
             {
                 waypoint.first += direction_it->second.first * amount;
                 waypoint.second += direction_it->second.second * amount;
