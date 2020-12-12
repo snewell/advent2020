@@ -162,3 +162,6 @@ create_puzzle(11b
         seatmap
     VALIDATE 2011
 )
+create_puzzle(12a
+    VALIDATE 879
+)
