@@ -11,15 +11,15 @@ namespace
         auto current_position = std::make_pair(0, 0);
         auto waypoint = std::make_pair(10, 1);
 
+        auto adjust_position = [&current_position, &waypoint](auto multiplier) {
+            current_position.first += waypoint.first * multiplier;
+            current_position.second += waypoint.second * multiplier;
+        };
+
         char command;
         int amount;
         while(input >> command >> amount)
         {
-            auto adjust_position = [&current_position,
-                                    &waypoint](auto multiplier) {
-                current_position.first += waypoint.first * multiplier;
-                current_position.second += waypoint.second * multiplier;
-            };
             static std::unordered_map<int, std::pair<int, int>> const
                 adjustments = {std::make_pair('N', std::make_pair(0, 1)),
                                std::make_pair('S', std::make_pair(0, -1)),

@@ -9,7 +9,7 @@ namespace
     int do_work(std::istream & input)
     {
         auto current_position = std::make_pair(0, 0);
-        std::array<std::pair<int, int>, 4> const headings = {
+        static std::array<std::pair<int, int>, 4> const headings = {
             std::make_pair(1, 0),  // east
             std::make_pair(0, -1), // south
             std::make_pair(-1, 0), // west
@@ -18,20 +18,21 @@ namespace
 
         auto current_heading = 0;
 
+        auto adjust_position = [&current_position](auto adjustment,
+                                                   auto multiplier) {
+            current_position.first += adjustment.first * multiplier;
+            current_position.second += adjustment.second * multiplier;
+        };
+
         char command;
         int amount;
         while(input >> command >> amount)
         {
-            auto adjust_position = [&current_position](auto adjustment,
-                                                       auto multiplier) {
-                current_position.first += adjustment.first * multiplier;
-                current_position.second += adjustment.second * multiplier;
-            };
-            std::unordered_map<int, std::pair<int, int>> const adjustments = {
-                std::make_pair('N', std::make_pair(0, 1)),
-                std::make_pair('S', std::make_pair(0, -1)),
-                std::make_pair('E', std::make_pair(1, 0)),
-                std::make_pair('W', std::make_pair(-1, 0))};
+            static std::unordered_map<int, std::pair<int, int>> const
+                adjustments = {std::make_pair('N', std::make_pair(0, 1)),
+                               std::make_pair('S', std::make_pair(0, -1)),
+                               std::make_pair('E', std::make_pair(1, 0)),
+                               std::make_pair('W', std::make_pair(-1, 0))};
 
             auto const direction_it = adjustments.find(command);
             if(direction_it != std::end(adjustments))
