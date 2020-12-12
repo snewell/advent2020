@@ -1,8 +1,10 @@
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <fstream>
 #include <iostream>
-#include <unordered_map>
+
+// 2,901,572
 
 namespace
 {
@@ -20,14 +22,19 @@ namespace
         int amount;
         while(input >> command >> amount)
         {
-            static std::unordered_map<int, std::pair<int, int>> const
-                adjustments = {std::make_pair('N', std::make_pair(0, 1)),
+            static std::array<std::pair<int, std::pair<int, int>>, 4> const
+                adjustments = {std::make_pair('E', std::make_pair(1, 0)),
+                               std::make_pair('N', std::make_pair(0, 1)),
                                std::make_pair('S', std::make_pair(0, -1)),
-                               std::make_pair('E', std::make_pair(1, 0)),
-                               std::make_pair('W', std::make_pair(-1, 0))};
+                               std::make_pair('W', std::make_pair(-1, 0))
 
-            auto const direction_it = adjustments.find(command);
-            if(direction_it != std::end(adjustments))
+                };
+
+            auto const direction_it = std::lower_bound(
+                std::begin(adjustments), std::end(adjustments), command,
+                [](auto lhs, auto const & rhs) { return lhs.first < rhs; });
+            if((direction_it != std::end(adjustments)) &&
+               (direction_it->first == command))
             {
                 waypoint.first += direction_it->second.first * amount;
                 waypoint.second += direction_it->second.second * amount;
