@@ -165,3 +165,6 @@ create_puzzle(11b
 create_puzzle(12a
     VALIDATE 879
 )
+create_puzzle(12b
+    VALIDATE 18107
+)
