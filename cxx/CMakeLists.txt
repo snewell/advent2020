@@ -168,3 +168,8 @@ create_puzzle(12a
 create_puzzle(12b
     VALIDATE 18107
 )
+create_puzzle(13a
+    VALIDATE 5946
+)
+create_puzzle(13b
+)
