@@ -176,3 +176,6 @@ create_puzzle(13b
 create_puzzle(14a
     VALIDATE 15514035145260
 )
+create_puzzle(14b
+    VALIDATE 3926790061594
+)
