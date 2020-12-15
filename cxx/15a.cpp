@@ -36,10 +36,10 @@ namespace
         int current;
         while(input >> current)
         {
-            numbers[current] = numbers.size() + 1;
+            ++count;
+            numbers[current] = count;
             char dummy;
             input.get(dummy);
-            ++count;
         }
         while(count < iterations)
         {
