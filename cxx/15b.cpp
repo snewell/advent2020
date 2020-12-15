@@ -25,7 +25,7 @@ namespace
         int previous_turn;
     };
 
-    constexpr int iterations = 2020;
+    constexpr int iterations = 30000000;
 
     auto do_work(std::istream & input)
     {

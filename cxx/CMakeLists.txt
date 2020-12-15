@@ -182,3 +182,6 @@ create_puzzle(14b
 create_puzzle(15a
     VALIDATE 1259
 )
+create_puzzle(15b
+    VALIDATE 689
+)
