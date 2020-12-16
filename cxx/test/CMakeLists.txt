@@ -35,3 +35,9 @@ create_test(pass_test
     LIBRARIES
         pass
 )
+create_test(train_test
+    SOURCES
+        train_test.cpp
+    LIBRARIES
+        train
+)

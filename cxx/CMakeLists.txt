@@ -72,6 +72,9 @@ create_library(pass
 create_library(seatmap
     seatmap.cpp
 )
+create_library(train
+    train.cpp
+)
 
 add_subdirectory(test)
 
@@ -184,4 +187,9 @@ create_puzzle(15a
 )
 create_puzzle(15b
     VALIDATE 689
+)
+create_puzzle(16a
+    LIBRARIES
+        train
+    VALIDATE 24110
 )
