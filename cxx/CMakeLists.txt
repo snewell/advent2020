@@ -198,3 +198,6 @@ create_puzzle(16b
         train
     VALIDATE 6766503490793
 )
+create_puzzle(17a
+    VALIDATE 372
+)
