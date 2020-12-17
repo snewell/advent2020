@@ -112,43 +112,6 @@ namespace
                 }
             }
 
-#if 0
-            for(auto z = -1; z < 2; ++z)
-            {
-                std::cout << "z = " << z << '\n';
-                for(auto y = 4; y > -4; --y)
-                {
-                    for(auto x = -4; x < 4; ++x)
-                    {
-                        auto it = neighbor_data.find(Point{x, y, z});
-                        if(it != neighbor_data.end())
-                        {
-                            std::cout << it->second;
-                        }
-                        else
-                        {
-                            std::cout << 'x';
-                        }
-                    }
-                    std::cout << "\t\t";
-                    for(auto x = -4; x < 4; ++x)
-                    {
-                        if(current_state.count(Point{x, y, z}) != 0)
-                        {
-                            std::cout << '#';
-                        }
-                        else
-                        {
-                            std::cout << '.';
-                        }
-                    }
-
-                    std::cout << '\n';
-                }
-                std::cout << '\n';
-            }
-#endif
-
             std::set<Point> next_state;
             for(auto const & [point, count] : neighbor_data)
             {
@@ -164,28 +127,6 @@ namespace
                     }
                 }
             }
-
-#if 0
-            for(auto z = -1; z < 2; ++z)
-            {
-                std::cout << "z = " << z << '\n';
-                for(auto y = -1; y < 2; ++y)
-                {
-                    for(auto x = -1; x < 2; ++x)
-                    {
-                        if(next_state.count(Point{x, y, z}) == 1)
-                        {
-                            std::cout << '#';
-                        }
-                        else
-                        {
-                            std::cout << '.';
-                        }
-                    }
-                    std::cout << '\n';
-                }
-            }
-#endif
 
             std::swap(next_state, current_state);
         }
