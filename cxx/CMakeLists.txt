@@ -193,3 +193,8 @@ create_puzzle(16a
         train
     VALIDATE 24110
 )
+create_puzzle(16b
+    LIBRARIES
+        train
+    VALIDATE 6766503490793
+)

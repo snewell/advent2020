@@ -21,11 +21,11 @@ namespace
     {
         std::string line;
 
-        aoc2020::TicketSet ts;
-        [&line, &input, &ts]() {
+        aoc2020::Fields fields;
+        [&line, &input, &fields]() {
             while(std::getline(input, line) && !line.empty())
             {
-                ts.fields.push_back(aoc2020::parse_field(line));
+                fields.push_back(aoc2020::parse_field(line));
             }
         }();
 
@@ -39,23 +39,23 @@ namespace
         assert(line.back() == ':');
 
         auto error_rate = 0;
-        [&line, &input, &ts, &error_rate]() {
+        [&line, &input, &fields, &error_rate]() {
             while(std::getline(input, line))
             {
                 auto const ticket = aoc2020::parse_ticket(line);
-                std::for_each(
-                    std::begin(ticket), std::end(ticket),
-                    [&ts, &error_rate](auto value) {
-                        auto const valid_field = std::find_if(
-                            std::begin(ts.fields), std::end(ts.fields),
-                            [value](auto const & field) {
-                                return check_field_ranges(value, field);
-                            });
-                        if(valid_field == std::end(ts.fields))
-                        {
-                            error_rate += value;
-                        }
-                    });
+                std::for_each(std::begin(ticket), std::end(ticket),
+                              [&fields, &error_rate](auto value) {
+                                  auto const valid_field = std::find_if(
+                                      std::begin(fields), std::end(fields),
+                                      [value](auto const & field) {
+                                          return check_field_ranges(value,
+                                                                    field);
+                                      });
+                                  if(valid_field == std::end(fields))
+                                  {
+                                      error_rate += value;
+                                  }
+                              });
             }
         }();
 

@@ -12,13 +12,9 @@ namespace aoc2020
         std::vector<std::pair<int, int>> ranges;
     };
 
-    using Ticket = std::vector<int>;
+    using Fields = std::vector<Field>;
 
-    struct TicketSet
-    {
-        std::vector<Field> fields;
-        std::vector<Ticket> tickets;
-    };
+    using Ticket = std::vector<int>;
 
     Field parse_field(std::string const & input);
 
