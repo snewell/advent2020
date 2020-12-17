@@ -201,3 +201,6 @@ create_puzzle(16b
 create_puzzle(17a
     VALIDATE 372
 )
+create_puzzle(17b
+    VALIDATE 1896
+)
