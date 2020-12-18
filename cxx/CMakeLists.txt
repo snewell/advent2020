@@ -66,6 +66,9 @@ create_library(baggage
 create_library(computer
     computer.cpp
 )
+create_library(lrmath
+    math.cpp
+)
 create_library(pass
     pass.cpp
 )
@@ -203,4 +206,9 @@ create_puzzle(17a
 )
 create_puzzle(17b
     VALIDATE 1896
+)
+create_puzzle(18a
+    LIBRARIES
+        lrmath
+    VALIDATE 11297104473091
 )

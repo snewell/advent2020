@@ -29,6 +29,12 @@ create_test(baggage_test
     LIBRARIES
         baggage
 )
+create_test(lrmath_test
+    SOURCES
+        lrmath_test.cpp
+    LIBRARIES
+        lrmath
+)
 create_test(pass_test
     SOURCES
         pass_test.cpp
