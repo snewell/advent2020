@@ -76,7 +76,6 @@ namespace
 
         for(auto count = 0; count < 6; ++count)
         {
-            auto considerations = 0;
             std::map<Point, int> neighbor_data;
             for(auto const & point : current_state)
             {
@@ -94,7 +93,6 @@ namespace
                                 if((next_x != point.x) || (next_y != point.y) ||
                                    (next_z != point.z) || (next_w != point.w))
                                 {
-                                    ++considerations;
                                     Point key{next_x, next_y, next_z, next_w};
                                     auto it = neighbor_data.find(key);
                                     if(it != neighbor_data.end())
